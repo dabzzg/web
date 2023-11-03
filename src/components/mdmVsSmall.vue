@@ -433,8 +433,8 @@ export default {
           this.rightVideo =
               require('@/assets/video/samples/mdm_trans_enc_000475000/'
                   + this.choose + '.mp4');
-          this.leftRadio = 1;
-          this.rightRadio = 2;
+          this.leftRadio = 3;
+          this.rightRadio = 4;
         }else {
           this.leftVideo =
               require('@/assets/video/samples/mdm_trans_enc_000475000/'
@@ -442,8 +442,8 @@ export default {
           this.rightVideo =
               require('@/assets/video/samples/t2m_ca_unet_dim192_ckpt_e015_same_lens/'
                   + this.choose + '.mp4');
-          this.leftRadio = 2;
-          this.rightRadio = 1;
+          this.leftRadio = 4;
+          this.rightRadio = 3;
         }
         setTimeout(() => {
           this.$refs.video.play()
