@@ -1,0 +1,12 @@
+
+小模型：t2m_ca_unet_dim192_ckpt_e015 ，t2m_ca_unet_dim192_ckpt_e015_same_lens(第二个用于和mdm相比时)
+大模型：t2m_ca_unet_dim512_2222_ckpt_e015
+mdm：mdm_trans_enc_000475000
+motiondiffuse：t2m_motiondiffuse_latest
+groundtruth：gt_motionsgt_motions
+
+一共比4组
+1. 小模型 vs. 大模型
+2. 小模型 vs. groundtruth
+3. 小模型 vs. motiondiffuse
+4. 小模型 vs. mdm
