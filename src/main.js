@@ -2,7 +2,7 @@ import Vue from 'vue'
 import App from './App.vue'
 
 Vue.config.productionTip = false
-
+import store from './store'
 // eslint-disable-next-line no-unused-vars
 import {http,baseURL} from './api/http.js'
 Vue.prototype.$http = http
@@ -26,4 +26,5 @@ import router from "./router";
 new Vue({
   render: h => h(App),
   router,
+  store
 }).$mount('#app')

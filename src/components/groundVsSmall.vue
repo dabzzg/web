@@ -174,6 +174,8 @@ export default {
     }
   },
   created() {
+    localStorage.removeItem('username');
+    localStorage.removeItem('userId');
     this.dialogFormVisible = !localStorage.getItem('username');
     if (localStorage.getItem('username')){
       this.form.name = localStorage.getItem('username');
