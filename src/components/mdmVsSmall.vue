@@ -172,22 +172,12 @@ export default {
       },
       okBtn: false,
       username: '',
+      userId: ''
     }
   },
   created() {
-    localStorage.removeItem('username');
-    localStorage.removeItem('userId');
-    this.dialogFormVisible = !localStorage.getItem('username');
-    if (localStorage.getItem('username')){
-      this.form.name = localStorage.getItem('username');
-      this.checkName();
-    }
   },
   mounted() {
-    // this.$refs.video.play();
-    this.username = localStorage.getItem('username') || '';
-    // localStorage.setItem('cats', 1);
-    // console.log(localStorage.getItem('cats'))
   },
   computed:{
     numList(){
@@ -208,17 +198,6 @@ export default {
     page() {
       return this.$route.query.page;
     }
-    // username() {
-    //   return localStorage.getItem('username')
-    // }
-    // leftVideo() {
-    //   return require('@/assets/video/samples/t2m_ca_unet_dim192_ckpt_e015/'
-    //       + this.choose + '.mp4');
-    // },
-    // rightVideo() {
-    //   return require('@/assets/video/samples/mdm_trans_enc_000475000/'
-    //       + this.choose + '.mp4');
-    // }
   },
   watch:{
     $route:{
@@ -255,13 +234,17 @@ export default {
         url: "/exUser/get",
         params: params
       }).then((res) => {
-        console.log(111, res)
         if (res.code == 200) {
-          console.log("====", res.data.userName)
-          localStorage.setItem('username', this.form.name);
-          localStorage.setItem('userId', res.data.id);
+          this.username = this.form.name;
+          this.userId = res.data.id;
           this.okBtn = true;
 
+          if (res.data.surveyGroup !== this.page) {
+            this.dialogFormVisible = false;
+            this.$router.push({path: this.$route.path, query:{page:
+                res.data.surveyGroup, }})
+            return this.checkName();
+          }
           if (res.data.data){
             this.chooseData = res.data.data;
             let a = [];
@@ -273,11 +256,8 @@ export default {
           }else {
             this.numArr = [...this.numList];
           }
-          console.log(this.numArr)
           this.getVideo();
 
-
-          this.username = localStorage.getItem('username');
           this.dialogFormVisible = false;
         }else {
           this.okBtn = false
@@ -301,8 +281,8 @@ export default {
         radio1: this.radio,
         radio2: this.radio1,
         type: '4',
-        userName: localStorage.getItem('username'),
-        userId: localStorage.getItem('userId'),
+        userName: this.username,
+        userId: this.userId,
         surveyGroup: this.page
       }
       this.$http({
@@ -321,7 +301,7 @@ export default {
     },
     submit() {
       let params = {
-        id: localStorage.getItem('userId'),
+        id: this.userId,
       }
       this.$http({
         method: "put",
@@ -351,9 +331,8 @@ export default {
     },
     delUser(){
       this.form.name = '';
-      localStorage.removeItem('username');
-      localStorage.removeItem('userId');
       this.username = '';
+      this.userId = '';
       this.dialogFormVisible = true;
       this.okBtn = true;
       this.chooseData = [];
