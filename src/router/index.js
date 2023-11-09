@@ -12,6 +12,7 @@ import index1 from '@/components/index.vue'
 import mdmVsSmall from "@/components/mdmVsSmall";
 import groundVsSmall from "@/components/groundVsSmall";
 import motiondiffuseVsSmall from "@/components/motiondiffuseVsSmall";
+import statistics from "@/components/statistics";
 
 export default new Router({
   routes: [
@@ -46,7 +47,12 @@ export default new Router({
           path: "/index/motiondiffuseVsSmall",
           name: "motiondiffuseVsSmall",
           component: motiondiffuseVsSmall,
-        }
+        },
+        {
+          path: "/index/statistics",
+          name: "statistics",
+          component: statistics,
+        },
       ]
     },
   ]

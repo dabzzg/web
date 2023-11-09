@@ -7,7 +7,7 @@
 <!--    <p>你的浏览器不支持video标签.</p>-->
 <!--  </video>-->
   <p style="display: block;font-size: 32px;margin-top: 30px">
-    用户调研
+    用户调研{{page}}
   </p>
   <p style="display: block;font-size: 24px;margin-top: 30px">
     当前用户: {{username}}
@@ -140,70 +140,7 @@
 </template>
 
 <script>
-
-let a = '一个人举起左臂，左手朝脸边放东西。\n' +
-    '一个人缓慢地直行。\n' +
-    '一个人大幅度地上下移动手臂，然后前后移动\n' +
-    '一个人慢慢后退\n' +
-    '一个人用一只脚保持平衡，同时移动另一只脚，然后换脚。\n' +
-    '一个男人正在打网球。\n' +
-    '一个人双手举起，向一侧移动，向前弯曲并触碰他的脚。\n' +
-    '双臂高举在空中跳舞。\n' +
-    '一个人向前走，跌跌撞撞，然后继续向前走。\n' +
-    '一个人斜着向后走\n' +
-    '一个人向前走，又停下来。\n' +
-    '一个人坐下来用手说话。\n' +
-    '用手擦拭东西\n' +
-    '一个人将右臂向外移动，而另一只手臂靠近臀部。然后，用双手做出铲动动作。\n' +
-    '双臂伸向两侧，一个人向前走\n' +
-    '一个人将右手举到脸上。\n' +
-    '一个人在快速做开合跳。\n' +
-    '这个人正在做开合跳。\n' +
-    '一个男人举起双手，从右到左移动试图找到什么东西，然后放下。\n' +
-    '一个人向前伸出右臂\n' +
-    '人站着并伸展他们的三头肌\n' +
-    '这个人正在将一些东西放入搅拌碗中。\n' +
-    '一个人跳跃时，双腿分开，手臂向外摆动至头顶上方，然后再次落下。\n' +
-    '一个人用双臂做手势。\n' +
-    '一个人从3点钟位置顺时针走到11点钟位置。\n' +
-    '一个人一边跳舞一边旋转。\n' +
-    '一个人沿着顺时针方向走一圈，然后在开始的地方停下来。\n' +
-    '一个人下降到地面并用四肢行走。\n' +
-    '一个人斜着向前跑，然后旋转九十度并跑\n' +
-    '一个人在行走时爬上一个台阶。\n' +
-    '有人用双臂比划着这些韵律，我是一个小茶壶，“把我抱起来，把我倒出来”\n' +
-    '一个人在两脚之间跳跃时将右腿踢两次，然后猛击右臂\n' +
-    '一个人逆时针向后移动，同时用其壮举画一条线\n' +
-    '一个人向前冲刺，然后四肢着地继续向前，然后站起来。\n' +
-    '一个人弯下腰环顾四周。\n' +
-    '一个人用右手挥手。\n' +
-    '一个人逆时针走一圈。\n' +
-    '转弯时从左向右运行并沿途增加速度。\n' +
-    '一个人用左腿站立，将右腿向侧面、向后摆动，然后回到双腿站立的位置。\n' +
-    '一个人缓慢地向前迈出稍微对角的一步\n' +
-    '一个人向右转，从两侧向右走，然后向左走。\n' +
-    '处于防御姿势的人先向右倾斜，然后向左倾斜。\n' +
-    '一个人缓慢地向前走。\n' +
-    '一个人向前走，然后转身走回来。\n' +
-    '一名男子重新摆放架子上的物品，然后退后一步。\n' +
-    '一个人跳跃\n' +
-    '一个人正在用右手挥手。\n' +
-    '有人右脚后退，然后坐下，双手放在膝盖上，肘部向外。\n' +
-    '有人在跳舞，他们先拍手，然后左右移动手臂，同时前后移动脚\n' +
-    '人站在t位置，双手交叉，然后返回t位置\n'
-let b = a.split(/\n/);
-let textObj = {};
-for (let i = 0; i < 50; i++) {
-  let val;
-  if (i < 10){
-    val = '0' + i;
-
-  }else {
-    val = ''+i;
-  }
-  textObj[val] = b[i]
-}
-
+import {getData} from "../utils/data";
 
 
 export default {
@@ -219,7 +156,7 @@ export default {
       rightVideo: '',
       leftRadio: '',
       rightRadio: '',
-      textObj: textObj,
+      textObj: getData(),
       chooseData: [],
       form: {
         name: ''
@@ -241,6 +178,7 @@ export default {
       this.form.name = localStorage.getItem('username');
       this.checkName();
     }
+    // console.log(getData())
   },
   mounted() {
     // this.$refs.video.play();
@@ -251,7 +189,8 @@ export default {
   computed:{
     numList(){
       let a = [];
-      for (let i = 0; i < 30; i++) {
+      for (let i = (30 * parseInt(this.page)); i < (30 *
+          (parseInt(this.page)+1)); i++) {
         if (i < 10){
           a.push('0' + i);
         }else {
@@ -263,6 +202,9 @@ export default {
     disabledVal() {
       return !(this.radio && this.radio1);
     },
+    page() {
+      return this.$route.query.page;
+    }
     // username() {
     //   return localStorage.getItem('username')
     // }
@@ -274,6 +216,18 @@ export default {
     //   return require('@/assets/video/samples/t2m_ca_unet_dim512_2222_ckpt_e015/'
     //       + this.choose + '.mp4');
     // }
+  },
+  watch:{
+    $route:{
+      handler(val) {
+        let a = ['1','2', '3', '4', '5']
+        if (!this.$route.query.page || !a.includes(this.$route.query.page)) {
+          this.$router.push({path: val.path, query: {page: '1'}})
+        }
+      },
+      immediate: true,
+      deep: true
+    }
   },
   methods:{
     getRandomInt(max) {
@@ -291,6 +245,7 @@ export default {
       let params = {
         name: this.form.name,
         type: '1',
+        surveyGroup: this.page
       }
       this.$http({
         method: "get",
@@ -343,7 +298,9 @@ export default {
         radio1: this.radio,
         radio2: this.radio1,
         type: '1',
-        userName: localStorage.getItem('username')
+        userName: localStorage.getItem('username'),
+        userId: localStorage.getItem('userId'),
+        surveyGroup: this.page
       }
       this.$http({
         method: "post",
