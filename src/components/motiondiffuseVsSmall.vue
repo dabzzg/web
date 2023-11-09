@@ -6,6 +6,7 @@
 <!--         ref="video">-->
 <!--    <p>你的浏览器不支持video标签.</p>-->
 <!--  </video>-->
+
   <p style="display: block;font-size: 32px;margin-top: 30px">
     用户调研
   </p>
@@ -251,12 +252,13 @@ export default {
   computed:{
     numList(){
       let a = [];
-      for (let i = 0; i < 30; i++) {
-        if (i < 10){
-          a.push('0' + i);
-        }else {
-          a.push(''+i);
-        }
+      for (let i = 20; i < 50; i++) {
+        // if (i < 10){
+        //   a.push('0' + i);
+        // }else {
+        //   a.push(''+i);
+        // }
+        a.push(''+i);
       }
       return a;
     },
@@ -271,7 +273,7 @@ export default {
     //       + this.choose + '.mp4');
     // },
     // rightVideo() {
-    //   return require('@/assets/video/samples/t2m_ca_unet_dim512_2222_ckpt_e015/'
+    //   return require('@/assets/video/samples/t2m_motiondiffuse_latest/'
     //       + this.choose + '.mp4');
     // }
   },
@@ -290,7 +292,7 @@ export default {
     checkName() {
       let params = {
         name: this.form.name,
-        type: '1',
+        type: '3',
       }
       this.$http({
         method: "get",
@@ -342,7 +344,7 @@ export default {
         topic: this.choose,
         radio1: this.radio,
         radio2: this.radio1,
-        type: '1',
+        type: '3',
         userName: localStorage.getItem('username')
       }
       this.$http({
@@ -430,18 +432,18 @@ export default {
               require('@/assets/video/samples/t2m_ca_unet_dim192_ckpt_e015/'
                   + this.choose + '.mp4');
           this.rightVideo =
-              require('@/assets/video/samples/t2m_ca_unet_dim512_2222_ckpt_e015/'
+              require('@/assets/video/samples/t2m_motiondiffuse_latest/'
                   + this.choose + '.mp4');
           this.leftRadio = 1;
-          this.rightRadio = 2;
+          this.rightRadio = 5;
         }else {
           this.leftVideo =
-              require('@/assets/video/samples/t2m_ca_unet_dim512_2222_ckpt_e015/'
+              require('@/assets/video/samples/t2m_motiondiffuse_latest/'
                   + this.choose + '.mp4');
           this.rightVideo =
               require('@/assets/video/samples/t2m_ca_unet_dim192_ckpt_e015/'
                   + this.choose + '.mp4');
-          this.leftRadio = 2;
+          this.leftRadio = 5;
           this.rightRadio = 1;
         }
         setTimeout(() => {

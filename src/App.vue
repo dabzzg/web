@@ -1,28 +1,19 @@
 <template>
   <div id="app">
-    <el-radio-group v-model="radio" class="radio_c">
-      <el-radio-button label="1">小模型 vs. 大模型</el-radio-button>
-      <el-radio-button label="2">小模型 vs. groundtruth</el-radio-button>
-      <el-radio-button label="3">小模型 vs. motiondiffuse</el-radio-button>
-      <el-radio-button label="4">小模型 vs. mdm</el-radio-button>
-    </el-radio-group>
+
 <!--    <HelloWorld ref="page" msg="Welcome to Your Vue.js App"/>-->
-    <mdmVsSmall v-if="radio == 4"></mdmVsSmall>
-    <page v-else-if="radio == 1"></page>
+<!--    <mdmVsSmall v-if="radio == 4"></mdmVsSmall>-->
+<!--    <page v-else-if="radio == 1"></page>-->
+<!--    <groundVsSmall v-else-if="radio == 2"></groundVsSmall>-->
+<!--    <motiondiffuseVsSmall v-else-if="radio == 3"></motiondiffuseVsSmall>-->
+    <router-view/>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-import page from './components/page.vue'
-import mdmVsSmall from "./components/mdmVsSmall";
-import {sendWebsocket} from "./utils/websocket";
-
 export default {
   name: 'App',
   components: {
-     page,
-      mdmVsSmall
   },
   data() {
     return {
@@ -31,6 +22,9 @@ export default {
   },
   mounted() {
   },
+  created() {
+    this.$route.query['index'] = this.radio;
+    },
   methods: {
   }
 }

@@ -8,7 +8,7 @@
 <!--  </video>-->
 
   <p style="display: block;font-size: 32px;margin-top: 30px">
-    mdm和小模型用户调研
+    用户调研
   </p>
   <p style="display: block;font-size: 24px;margin-top: 30px">
     当前用户: {{username}}
@@ -344,6 +344,7 @@ export default {
         topic: this.choose,
         radio1: this.radio,
         radio2: this.radio1,
+        type: '4',
         userName: localStorage.getItem('username')
       }
       this.$http({

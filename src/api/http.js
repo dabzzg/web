@@ -1,6 +1,7 @@
 import axios from 'axios'
 // eslint-disable-next-line no-unused-vars
-export const baseURL = "http://192.168.1.193:9001" //"https://jingsu.idawa.cn", //服务器地址
+export const baseURL = "http://192.168.1.193:9001" //"https://jingsu.idawa.cn",
+// 服务器地址
 //创建axios实例对象
 let instance = axios.create({
     baseURL: baseURL,//"https://jingsu.idawa.cn", //服务器地址

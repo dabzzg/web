@@ -21,7 +21,9 @@ Vue.use(websocket, '', {
   reconnectionAttempts: 5, // 自动重连次数
   reconnectionDelay: 2000, // 重连间隔时间
 });
+import router from "./router";
 
 new Vue({
   render: h => h(App),
+  router,
 }).$mount('#app')
