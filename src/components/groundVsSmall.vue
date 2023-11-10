@@ -181,8 +181,8 @@ export default {
   computed:{
     numList(){
       let a = [];
-      for (let i = (30 * parseInt(this.page)); i < (30 *
-          (parseInt(this.page)+1)); i++) {
+      for (let i = (30 * (parseInt(this.page)-1)); i < (30 *
+          (parseInt(this.page))); i++) {
         if (i < 10){
           a.push('0' + i);
         }else {
